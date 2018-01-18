@@ -1,4 +1,3 @@
-package nl.hanze.itann.ttt;
 // deze import hebben we nodig voor gebruikersinput – let daar maar niet op.
 import java.util.Scanner;
 
