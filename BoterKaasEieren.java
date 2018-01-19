@@ -50,15 +50,29 @@ public class BoterKaasEieren {
 	
 	// De huidige speler. Dit is ofwel een 'X' of een 'O'
 	private char currentPlayerMark;
+	
+	private char player1;
+	private char player2;
 
 	//constructor
-	public BoterKaasEieren() {
+	public BoterKaasEieren()	{	
+		definePlayers();
 		board = new char[3][3];
-		currentPlayerMark = 'X';
+		currentPlayerMark = 'player1';
 		initializeBoard();
 		playGame();
 	}
 
+	
+	private void definePlayers() {
+		Scanner reader = new Scanner(System.in);
+		char inputp1;
+		char inputp2;
+		player1 = inputp1;
+		player2 = inputp2;
+		reader.close();
+		
+	}
 	// Dit is feitelijk de 'main loop'. Dit ding blijft lopen totdat het bord vol is
 	// of er een winnaar is.
 	private void playGame() {
@@ -136,7 +150,7 @@ public class BoterKaasEieren {
 
 	private void changePlayer() {
 		// hoe heet deze constructie?
-		currentPlayerMark = (currentPlayerMark=='X') ? 'O' : 'X';
+		currentPlayerMark = (currentPlayerMark=='player1') ? 'player2' : 'player1';
 	}
 
 
