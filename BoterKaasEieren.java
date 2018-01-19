@@ -11,13 +11,13 @@ je de positie van stukken weergeeft als bijvoorbeeld 'H3'.
 Om dit om een wat eenvoudiger manier duidelijk te maken, is onderstaand spel 'boter kaas en eieren'
 uitgeprogrammeerd. Dit heeft een bord als volgt:
 
-		+------+------+------+
-		| (0,0 | (1,0 | (2,0 | 
-		+------+------+------+
-		| (0,1 | (1,1 | (2,1 | 
-		+------+------+------+
-		| (0,2 | (1,2 | (2,2 | 
-		+------+------+------+
+		+-------+------+--------+
+		| (0,0) | (1,0) | (2,0) | 
+		+-------+-------+-------+
+		| (0,1) | (1,1) | (2,1) | 
+		+-------+-------+-------+
+		| (0,2) | (1,2) | (2,2) | 
+		+-------+-------+-------+
 		
 Je ziet hier twee arrays lopen: één voor de X en één voor de Y. Beide lopen van 0 tot 2 
 (drie elementen). In de code wordt dit in  het private veld 'board' bijgehouden, waarvan 
