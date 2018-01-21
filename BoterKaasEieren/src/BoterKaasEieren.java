@@ -113,7 +113,7 @@ public class BoterKaasEieren {
 		int col = Integer.parseInt(coords[0]);
 		int row = Integer.parseInt(coords[1]);
 		
-		String wav_file = "C:\\Users\\Taco\\eclipse-workspace\\BoterKaasEieren\\0564.wav";
+		String wav_file = "./resources/0564.wav";
 		
 		InputStream in = null;
 		try {
