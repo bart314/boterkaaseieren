@@ -112,7 +112,7 @@ public class BoterKaasEieren {
 		//We gaan er even van uit dat er in de input twee getallen zijn gegeven.
 		int col = Integer.parseInt(coords[0]);
 		int row = Integer.parseInt(coords[1]);
-		
+
 		String wav_file = "./resources/0564.wav";
 		
 		InputStream in = null;
