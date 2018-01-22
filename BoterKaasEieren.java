@@ -51,28 +51,36 @@ public class BoterKaasEieren {
 	// De huidige speler. Dit is ofwel een 'X' of een 'O'
 	private char currentPlayerMark;
 	
-	private char player1;
-	private char player2;
+	private static char player1;
+	private static char player2;
 
 	//constructor
-	public BoterKaasEieren()	{	
+public BoterKaasEieren()	{	
 		definePlayers();
 		board = new char[3][3];
-		currentPlayerMark = 'player1';
+		currentPlayerMark = player1;
 		initializeBoard();
 		playGame();
 	}
 
-	
+	//Methode om een initiaal aan een speler te geven.
 	private void definePlayers() {
-		Scanner reader = new Scanner(System.in);
-		char inputp1;
-		char inputp2;
+		System.out.println("Voer een initaal in voor speler 1. Maximaal 1 letter:");
+		Scanner in = new Scanner(System.in); // op dit moment ontbreekt er nog validatie op de input
+		char inputp1 = in.next().charAt(0); 
+		System.out.println("Voer een initaal in voor speler 2. Maximaal 1 letter:");
+		char inputp2 = in.next().charAt(0); // op dit moment ontbreekt er nog validatie op de input
 		player1 = inputp1;
 		player2 = inputp2;
-		reader.close();
-		
+		// Hier stond een code regel om de Scanner te sluiten:  in.close();
+		// Dit zorgde voor een error. 
+		// De Scanner wordt in de methode playGame() opnieuw gebruikt. Daar werkt de scanner niet meer
+		// als de Scanner gesloten wordt in een andere methode. 
+		// Deze informatie heb ik hier vandaan:
+		// https://stackoverflow.com/questions/13223723/scanner-error-that-i-cant-figure-out-nosuchelementexception
 	}
+	
+	
 	// Dit is feitelijk de 'main loop'. Dit ding blijft lopen totdat het bord vol is
 	// of er een winnaar is.
 	private void playGame() {
@@ -150,7 +158,7 @@ public class BoterKaasEieren {
 
 	private void changePlayer() {
 		// hoe heet deze constructie?
-		currentPlayerMark = (currentPlayerMark=='player1') ? 'player2' : 'player1';
+		currentPlayerMark = (currentPlayerMark==player1) ? player2 : player1;
 	}
 
 
