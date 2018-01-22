@@ -44,15 +44,23 @@ public class BoterKaasEieren {
 	}
 
 	// Dit is het interessante veld. Een twee-dimensionale array die het speelveld bijhoudt.
-	private char[][] board; 
-	
+	private char[][] board;
+
 	// De huidige speler. Dit is ofwel een 'X' of een 'O'
 	private char currentPlayerMark;
+	private String currentPlayerName;
+
+	private String namePlayer1;
+	private String namePlayer2;
+	private char markPlayer1;
+	private char markPlayer2;
+
+	Scanner reader = new Scanner(System.in);
 
 	//constructor
 	public BoterKaasEieren() {
 		board = new char[3][3];
-		currentPlayerMark = 'X';
+
 		initializeBoard();
 		playGame();
 	}
@@ -62,42 +70,81 @@ public class BoterKaasEieren {
 	private void playGame() {
 		//De regels hieronder is om user-input op te vangen. Maak je daar niet druk om.
 		//Van belang is dat de input wordt opgeslagen in de variable 'input'.
-		Scanner reader = new Scanner(System.in);
+		// Scanner reader = new Scanner(System.in);
 		String input = "";
-		
+		initializePlayers();
+
+
 		//De onderstaande loop wordt uitgevoerd zolang 'gameNotFinished' geen 'false'
 		//teruggeeft (hoe heet zo'n conditie?). Dat kan omdat er in die loop een methode
 		//wordt aangeroepen die de boel blokkeert tot iemand een input heeft gegeven.
-		
+
 		while (gameNotFinished()) {
 			//we printen elke keer de nieuwe status van het speelbord even uit
 			printBoard();
 			changePlayer();
-			
+
 			// Hier geven we aan wie er aan de beurt is en wat hij/zij moet invullen.
-			System.out.println("De beurt in aan "+currentPlayerMark);
+			System.out.println("De beurt in aan " + currentPlayerName);
 			System.out.println("Geef positie op (x,y): ");
-			
-			//Deze methode blijft wachten totdat de gebruiker iets heeft ingeveoerd. 
-			//Hierom kunnen we deze loop laten blijven lopen zonder dat er continu 
+
+			//Deze methode blijft wachten totdat de gebruiker iets heeft ingeveoerd.
+			//Hierom kunnen we deze loop laten blijven lopen zonder dat er continu
 			//dingen op het scherm verschijnen.
 			input = reader.next();
 
 			//We maken een array van Strings van de input – check de API van de string:
 			// https://docs.oracle.com/javase/7/docs/api/java/lang/String.html#split(java.lang.String)
 			String[] coords = input.split(",");
-			
+
 			placeMark(coords);
 		}
-		
-		// Even het winnende bord afdrukken 
+
+		// Even het winnende bord afdrukken
 		printBoard();
-		
+
 		//als we hier komen, hebben we die reader niet meer nodig, en het is wel netjes om
 		//die even expliciet te sluiten.
 		reader.close();
 	}
 
+	private void initializePlayers() {
+		System.out.println("Please fill in name player 1");
+		namePlayer1 = fillPlayerName();
+		markPlayer1 = fillPlayerMark(namePlayer1);
+
+		System.out.println("Please fill in name player 2");
+		namePlayer2 = fillPlayerName();
+		markPlayer2 = fillPlayerMark(namePlayer2);
+
+		checkPlayerMarksAreUnique();
+		currentPlayerName = namePlayer2;
+		currentPlayerMark = markPlayer2;
+
+	}
+
+	private void checkPlayerMarksAreUnique() {
+		if (markPlayer2 != markPlayer1) {
+			return;
+		}
+		System.out.println("Because Player 1 and 2 have the same initials, player 2 has to choose a playing mark");
+		markPlayer2 = reader.next().toUpperCase().charAt(0);
+		checkPlayerMarksAreUnique();
+	}
+
+	private String fillPlayerName() {
+		String newName;
+		newName = reader.next();
+		if (!newName.equals(namePlayer1)) {
+			return newName;
+		}
+		System.out.println("Please fill in an unique name (So not " + namePlayer1 + ")");
+		return fillPlayerName();
+	}
+
+	private char fillPlayerMark(String namePlayer) {
+		return namePlayer.toUpperCase().charAt(0);
+	}
 
 	private boolean placeMark(String[] coords) {
 		//We gaan er even van uit dat er in de input twee getallen zijn gegeven.
@@ -116,9 +163,9 @@ public class BoterKaasEieren {
 
 		return false;
 	}
-	
+
 	//Hier initialiseren we de twee-dimensionale array. We hebben dus twee for-lussen nodig:
-	//voor elke array eentje. De variabel i loopt van 0 tot 2, net als de variabele j (dat 
+	//voor elke array eentje. De variabel i loopt van 0 tot 2, net als de variabele j (dat
 	//klopt ook, want we hebben dat ding geïnitialiseerd op char[3][3]).
 	private void initializeBoard() {
 		for (int i = 0; i < 3; i++) {
@@ -126,22 +173,27 @@ public class BoterKaasEieren {
 				board[i][j] = '-'; // initieel is elk element een '-'
 			}
 		}
-		
+
 		//Even voor het gemak de exacte coördinaten weergeven
 		printBoardCoords();
 	}
 
 
 	private void changePlayer() {
-		// hoe heet deze constructie?
-		currentPlayerMark = (currentPlayerMark=='X') ? 'O' : 'X';
+		// hoe heet deze constructie? - > Conditional (ternary) Operator -> maar nu niet meer!!!
+		if (currentPlayerName.equals(namePlayer1)) {
+			currentPlayerName = namePlayer2;
+			currentPlayerMark = markPlayer2;
+		} else {
+			currentPlayerName = namePlayer1;
+			currentPlayerMark = markPlayer1;
+		}
 	}
 
 
 	private boolean gameNotFinished() {
 		return !(isBoardFull() || checkForWin());
 	}
-
 
 
 	private void printBoard() {
@@ -156,14 +208,14 @@ public class BoterKaasEieren {
 		}
 	}
 
-	private void printBoardCoords() {	
+	private void printBoardCoords() {
 		System.out.println("Vul de coördinaten in zonder haakjes, gescheiden door een komma.");
 		System.out.println("De coördinaten in het bord zijn als volgt:");
 		System.out.println("+-------+-------+-------+");
 		for (int i = 0; i < 3; i++) {
 			System.out.print("| ");
 			for (int j = 0; j < 3; j++) {
-				System.out.print("(" +j+","+i + ") | ");
+				System.out.print("(" + j + "," + i + ") | ");
 			}
 			System.out.println();
 			System.out.println("+-------+-------+-------+");
@@ -171,9 +223,9 @@ public class BoterKaasEieren {
 	}
 
 
-	//Opnieuw hebben we hier een dubbele for-lus nodig, om door beide arrays heen te 
+	//Opnieuw hebben we hier een dubbele for-lus nodig, om door beide arrays heen te
 	//loopen. We checken hier nu voor elk element wat er exact is zit, en als er nog ergens
-	//een '-' voorkomt, is het bord nog niet vol (want initieel hebben we het bord volgezet 
+	//een '-' voorkomt, is het bord nog niet vol (want initieel hebben we het bord volgezet
 	//met een '-', in de methode initializeBoard)
 	private boolean isBoardFull() {
 		boolean isFull = true;
@@ -189,25 +241,22 @@ public class BoterKaasEieren {
 			System.out.println("Het bord is vol; eind van het spel.");
 			return true;
 		}
-		
+
 		return false;
 	}
-	
-	
 
 
 	// voor de rest: nevermind
 
 	private boolean checkForWin() {
 		if (checkRowsForWin() || checkColumnsForWin() || checkDiagonalsForWin()) {
-			System.out.println("We hebben een winnaar: " +currentPlayerMark);
+			System.out.println("We hebben een winnaar: " + currentPlayerName);
 			return true;
 		}
 		return false;
 	}
 
-	
-	
+
 	private boolean checkRowsForWin() {
 		for (int i = 0; i < 3; i++) {
 			if (checkRowCol(board[i][0], board[i][1], board[i][2]) == true) {
@@ -236,7 +285,6 @@ public class BoterKaasEieren {
 	private boolean checkRowCol(char c1, char c2, char c3) {
 		return ((c1 != '-') && (c1 == c2) && (c2 == c3));
 	}
-
 
 
 }
