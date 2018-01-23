@@ -56,10 +56,11 @@ public class BoterKaasEieren {
 	private char markPlayer1;
 	private char markPlayer2;
 
-	Scanner reader = new Scanner(System.in);
+
+	private Scanner reader = new Scanner(System.in);
 
 	//constructor
-	public BoterKaasEieren() {
+	private BoterKaasEieren() {
 		board = new char[3][3];
 
 		initializeBoard();
