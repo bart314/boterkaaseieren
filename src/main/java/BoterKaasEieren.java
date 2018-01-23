@@ -1,4 +1,9 @@
-package src;// deze import hebben we nodig voor gebruikersinput – let daar maar niet op.
+
+// deze import hebben we nodig voor gebruikersinput – let daar maar niet op.
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
+
+import java.io.*;
 import java.util.Scanner;
 
 /*
@@ -153,7 +158,14 @@ public class BoterKaasEieren {
 		int col = Integer.parseInt(coords[0]);
 		int row = Integer.parseInt(coords[1]);
 
-		//Let op hoe we opnieuw door een twee-dimensionale array lopen
+        try {
+            playsNewSetSound();
+        } catch (IOException e) {
+            System.out.println("Something went wrong playing the tunes " + e);
+        }
+
+
+        //Let op hoe we opnieuw door een twee-dimensionale array lopen
 		if ((row >= 0) && (row < 3)) {
 			if ((col >= 0) && (col < 3)) {
 				if (board[row][col] == '-') {
@@ -166,7 +178,15 @@ public class BoterKaasEieren {
 		return false;
 	}
 
-	//Hier initialiseren we de twee-dimensionale array. We hebben dus twee for-lussen nodig:
+    private void playsNewSetSound() throws IOException {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File wavFile = new File(classLoader.getResource("wav/0564.wav").getFile());
+        InputStream in = new FileInputStream(wavFile);
+        AudioStream audio = new AudioStream(in);
+        AudioPlayer.player.start(audio);
+    }
+
+    //Hier initialiseren we de twee-dimensionale array. We hebben dus twee for-lussen nodig:
 	//voor elke array eentje. De variabel i loopt van 0 tot 2, net als de variabele j (dat
 	//klopt ook, want we hebben dat ding geïnitialiseerd op char[3][3]).
 	private void initializeBoard() {
