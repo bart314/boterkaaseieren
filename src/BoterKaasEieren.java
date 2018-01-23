@@ -35,6 +35,7 @@ Er is een minimale check op de input, want het gaat niet om een correcte werking
 gaat door een verkeerde input kun je vast wel bedenken waarom.
 
 Bestudeer de programmacode en het commentaar dat er tussendoor gegeven is.
+
 */
 
 
