@@ -158,12 +158,12 @@ public class BoterKaasEieren {
 		int col = Integer.parseInt(coords[0]);
 		int row = Integer.parseInt(coords[1]);
 
-        try {
+ /*       try {
             playsNewSetSound();
         } catch (IOException e) {
             System.out.println("Something went wrong playing the tunes " + e);
         }
-
+*/
 
         //Let op hoe we opnieuw door een twee-dimensionale array lopen
 		if ((row >= 0) && (row < 3)) {
