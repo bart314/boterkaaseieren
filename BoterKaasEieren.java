@@ -41,6 +41,7 @@ Bestudeer de programmacode en het commentaar dat er tussendoor gegeven is.
 
 
 public class BoterKaasEieren {
+	
 	public static void main(String[] args) {
 		new BoterKaasEieren();
 	}
@@ -51,10 +52,14 @@ public class BoterKaasEieren {
 	// De huidige speler. Dit is ofwel een 'X' of een 'O'
 	private char currentPlayerMark;
 
+	// deze boolean geeft aan of het spel door een speler is afgebroken en wordt geinitialiseerd op false (= niet).
+	private boolean isAborted;
+
 	//constructor
 	public BoterKaasEieren() {
 		board = new char[3][3];
 		currentPlayerMark = 'X';
+		isAborted = false;
 		initializeBoard();
 		playGame();
 	}
@@ -84,17 +89,23 @@ public class BoterKaasEieren {
 			//Hierom kunnen we deze loop laten blijven lopen zonder dat er continu 
 			//dingen op het scherm verschijnen.
 			input = reader.next();
-
-			//We maken een array van Strings van de input – check de API van de string:
-			// https://docs.oracle.com/javase/7/docs/api/java/lang/String.html#split(java.lang.String)
-			String[] coords = input.split(",");
+			isAborted = (input.toUpperCase().contains("STOP") || input.toUpperCase().contains("QUIT"));
+			if (!isAborted) {
+				//We maken een array van Strings van de input – check de API van de string:
+				// https://docs.oracle.com/javase/7/docs/api/java/lang/String.html#split(java.lang.String)
+				String[] coords = input.split(",");
 			
-			placeMark(coords);
+				placeMark(coords);
+			}
 		}
 		
-		// Even het winnende bord afdrukken 
-		printBoard();
-		
+		if (isAborted) {
+			System.out.println("Spel afgebroken.");
+		}
+		else {
+			//Even het winnende bord afdrukken 
+			printBoard();
+		}
 		//als we hier komen, hebben we die reader niet meer nodig, en het is wel netjes om
 		//die even expliciet te sluiten.
 		reader.close();
@@ -141,7 +152,7 @@ public class BoterKaasEieren {
 
 
 	private boolean gameNotFinished() {
-		return !(isBoardFull() || checkForWin());
+		return !(isBoardFull() || checkForWin() || isAborted);
 	}
 
 
@@ -170,6 +181,7 @@ public class BoterKaasEieren {
 			System.out.println();
 			System.out.println("+-------+-------+-------+");
 		}
+		System.out.println("(Type 'stop' of 'quit' om het spel af te breken.)");
 	}
 
 
