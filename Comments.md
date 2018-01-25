@@ -1,7 +1,7 @@
 #Gebruik dit bestand om elkaars werk te becommentariëren#
 
 
-@all met het juiste git commande is de wijziging van Taco te draaien. met -> java -cp ".;../resources" BoterKaasEieren <- zet je het classpath naar de juiste resource folder. 
+@all met het juiste git commande is de wijziging van Taco te draaien. met -> java -cp ".;../resources" game.BoterKaasEieren <- zet je het classpath naar de juiste resource folder. 
 voor het geval het toch niet zou werken heb ik deen failsave ingebouwd. maw vinden we de file niet dan gebruiken we hem ook niet.
 
 
