@@ -171,6 +171,7 @@ public class BoterKaasEieren {
 					board[row][col] = currentPlayerMark;
 					return true;
 				}
+				else{System.out.println("Even opletten, gast!\nVoer coordinaten in van onbezet hokje!");}
 			}
 		}
 
