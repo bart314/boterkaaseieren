@@ -52,7 +52,7 @@ public class BoterKaasEieren {
 	// Dit is het interessante veld. Een twee-dimensionale array die het speelveld bijhoudt.
 	private char[][] board;
 
-	// De huidige speler. Dit is ofwel een 'X' of een 'O'
+	// De huidige speler. Dit is ofwel een 'player1' of een 'player2'
 	private char currentPlayerMark;
 	private String currentPlayerName;
 
@@ -92,7 +92,7 @@ public class BoterKaasEieren {
 			changePlayer();
 
 			// Hier geven we aan wie er aan de beurt is en wat hij/zij moet invullen.
-			System.out.println("De beurt in aan " + currentPlayerName);
+			System.out.println("De beurt is aan " + currentPlayerName);
 			System.out.println("Geef positie op (x,y): ");
 
 			//Deze methode blijft wachten totdat de gebruiker iets heeft ingeveoerd.
@@ -116,11 +116,11 @@ public class BoterKaasEieren {
 	}
 
 	private void initializePlayers() {
-		System.out.println("Please fill in name player 1");
+		System.out.println("Voer de naam van speler1 in:");
 		namePlayer1 = fillPlayerName();
 		markPlayer1 = fillPlayerMark(namePlayer1);
 
-		System.out.println("Please fill in name player 2");
+		System.out.println("Voer de naam van speler2 in:");
 		namePlayer2 = fillPlayerName();
 		markPlayer2 = fillPlayerMark(namePlayer2);
 
@@ -134,7 +134,7 @@ public class BoterKaasEieren {
 		if (markPlayer2 != markPlayer1) {
 			return;
 		}
-		System.out.println("Because Player 1 and 2 have the same initials, player 2 has to choose a playing mark");
+		System.out.println("De initialen van speler1 en speler2 zijn gelijk. Voer een ander initiaal voor speler2 in:");
 		markPlayer2 = reader.next().toUpperCase().charAt(0);
 		checkPlayerMarksAreUnique();
 	}
@@ -145,7 +145,7 @@ public class BoterKaasEieren {
 		if (!newName.equals(namePlayer1)) {
 			return newName;
 		}
-		System.out.println("Please fill in an unique name (So not " + namePlayer1 + ")");
+		System.out.println("De ingevoerde naam voor speler2 is niet uniek, voer een nieuwe, unieke, naam in (dus niet: " + namePlayer1 + ")");
 		return fillPlayerName();
 	}
 
@@ -161,7 +161,7 @@ public class BoterKaasEieren {
         try {
             playsNewSetSound();
         } catch (IOException e) {
-            System.out.println("Something went wrong playing the tunes " + e);
+            System.out.println("Er is iets misgegeaan bij het afspelen van het geluidsfragment " + e);
         }
 
         //Let op hoe we opnieuw door een twee-dimensionale array lopen
@@ -170,8 +170,9 @@ public class BoterKaasEieren {
 				if (board[row][col] == '-') {
 					board[row][col] = currentPlayerMark;
 					return true;
+
 				}
-				else{System.out.println("Even opletten, gast!\nVoer coordinaten in van onbezet hokje!");}
+				else{System.out.println("Even opletten, gast!\nVoer coördinaten in van een onbezet hokje!");}
 			}
 		}
 
