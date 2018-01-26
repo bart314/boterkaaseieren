@@ -168,6 +168,12 @@ public class BoterKaasEieren {
      }
 */
 
+        try {
+            playsNewSetSound();
+        } catch (IOException e) {
+            System.out.println("Something went wrong playing the tunes " + e);
+        }
+
      //Let op hoe we opnieuw door een twee-dimensionale array lopen
 		if ((row >= 0) && (row < 3)) {
 			if ((col >= 0) && (col < 3)) {
@@ -175,6 +181,7 @@ public class BoterKaasEieren {
 					board[row][col] = currentPlayerMark;
 					return true;
 				}
+				else{System.out.println("Even opletten, gast!\nVoer coordinaten in van onbezet hokje!");}
 			}
 		}
 
@@ -188,6 +195,16 @@ public class BoterKaasEieren {
      AudioStream audio = new AudioStream(in);
      AudioPlayer.player.start(audio);
  }
+
+    private void playsNewSetSound() throws IOException {
+        ClassLoader classLoader = getClass().getClassLoader();
+        if(!(null ==classLoader.getResource("wav/0564.wav"))){
+            File wavFile = new File(classLoader.getResource("wav/0564.wav").getFile());
+            InputStream in = new FileInputStream(wavFile);
+            AudioStream audio = new AudioStream(in);
+            AudioPlayer.player.start(audio);
+        }
+    }
 
  //Hier initialiseren we de twee-dimensionale array. We hebben dus twee for-lussen nodig:
 	//voor elke array eentje. De variabel i loopt van 0 tot 2, net als de variabele j (dat
