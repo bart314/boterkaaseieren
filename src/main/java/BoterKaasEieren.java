@@ -1,5 +1,7 @@
+ 
 
-// deze import hebben we nodig voor gebruikersinput – let daar maar niet op.
+
+//deze import hebben we nodig voor gebruikersinput â€“ let daar maar niet op.
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
 
@@ -7,10 +9,10 @@ import java.io.*;
 import java.util.Scanner;
 
 /*
-EEN EXTRA VOORBEELD BIJ §7.6 VAN BLUEJ EDITIE 6: MULTI-DIMENSIONALE ARRAYS;
+EEN EXTRA VOORBEELD BIJ Â§7.6 VAN BLUEJ EDITIE 6: MULTI-DIMENSIONALE ARRAYS;
 
 Een multi-dimensionale array kun je het beste vergelijken met een spelbord. Dit is meestal een 
-systeem waarbij coördinaten als (X,Y) kunnen worden weergegeven – denk aan een schaakbord waarbij
+systeem waarbij coÃ¶rdinaten als (X,Y) kunnen worden weergegeven â€“ denk aan een schaakbord waarbij
 je de positie van stukken weergeeft als bijvoorbeeld 'H3'. 
 
 Om dit om een wat eenvoudiger manier duidelijk te maken, is onderstaand spel 'boter kaas en eieren'
@@ -24,16 +26,16 @@ uitgeprogrammeerd. Dit heeft een bord als volgt:
 		| (0,2) | (1,2) | (2,2) | 
 		+-------+-------+-------+
 		
-Je ziet hier twee arrays lopen: één voor de X en één voor de Y. Beide lopen van 0 tot 2 
+Je ziet hier twee arrays lopen: Ã©Ã©n voor de X en Ã©Ã©n voor de Y. Beide lopen van 0 tot 2 
 (drie elementen). In de code wordt dit in  het private veld 'board' bijgehouden, waarvan 
 het data-type een twee-dimensionale array van char's is:
- 
+
 		private char[3][3] board
 		             ^  ^
 		             |  |
 		 X -----------  --------Y
 		 
-Je kunt dit spel spelen door het op te starten en dan de coördinaten in te vullen wanneer het 
+Je kunt dit spel spelen door het op te starten en dan de coÃ¶rdinaten in te vullen wanneer het 
 programma daar om vraagt: als ik bijvoorbeeld een X wil zetten op het rechtsmiddelste vakje, typ
 ik 2,1 (zonder haakjes). 
 Er is een minimale check op de input, want het gaat niet om een correcte werking; als het stuk 
@@ -45,7 +47,8 @@ Bestudeer de programmacode en het commentaar dat er tussendoor gegeven is.
 
 
 public class BoterKaasEieren {
-	public static void main(String[] args) {
+	
+	public static void main (String[] args) {
 		new BoterKaasEieren();
 	}
 
@@ -98,9 +101,9 @@ public class BoterKaasEieren {
 			//Deze methode blijft wachten totdat de gebruiker iets heeft ingeveoerd.
 			//Hierom kunnen we deze loop laten blijven lopen zonder dat er continu
 			//dingen op het scherm verschijnen.
-			input = reader.next();
+			input = getInput();
 
-			//We maken een array van Strings van de input – check de API van de string:
+			//We maken een array van Strings van de input â€“ check de API van de string:
 			// https://docs.oracle.com/javase/7/docs/api/java/lang/String.html#split(java.lang.String)
 			String[] coords = input.split(",");
 
@@ -158,14 +161,14 @@ public class BoterKaasEieren {
 		int col = Integer.parseInt(coords[0]);
 		int row = Integer.parseInt(coords[1]);
 
- /*       try {
-            playsNewSetSound();
-        } catch (IOException e) {
-            System.out.println("Something went wrong playing the tunes " + e);
-        }
+/*       try {
+         playsNewSetSound();
+     } catch (IOException e) {
+         System.out.println("Something went wrong playing the tunes " + e);
+     }
 */
 
-        //Let op hoe we opnieuw door een twee-dimensionale array lopen
+     //Let op hoe we opnieuw door een twee-dimensionale array lopen
 		if ((row >= 0) && (row < 3)) {
 			if ((col >= 0) && (col < 3)) {
 				if (board[row][col] == '-') {
@@ -178,17 +181,17 @@ public class BoterKaasEieren {
 		return false;
 	}
 
-    private void playsNewSetSound() throws IOException {
-        ClassLoader classLoader = getClass().getClassLoader();
-        File wavFile = new File(classLoader.getResource("wav/0564.wav").getFile());
-        InputStream in = new FileInputStream(wavFile);
-        AudioStream audio = new AudioStream(in);
-        AudioPlayer.player.start(audio);
-    }
+ private void playsNewSetSound() throws IOException {
+     ClassLoader classLoader = getClass().getClassLoader();
+     File wavFile = new File(classLoader.getResource("wav/0564.wav").getFile());
+     InputStream in = new FileInputStream(wavFile);
+     AudioStream audio = new AudioStream(in);
+     AudioPlayer.player.start(audio);
+ }
 
-    //Hier initialiseren we de twee-dimensionale array. We hebben dus twee for-lussen nodig:
+ //Hier initialiseren we de twee-dimensionale array. We hebben dus twee for-lussen nodig:
 	//voor elke array eentje. De variabel i loopt van 0 tot 2, net als de variabele j (dat
-	//klopt ook, want we hebben dat ding geïnitialiseerd op char[3][3]).
+	//klopt ook, want we hebben dat ding geÃ¯nitialiseerd op char[3][3]).
 	private void initializeBoard() {
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 3; j++) {
@@ -196,7 +199,7 @@ public class BoterKaasEieren {
 			}
 		}
 
-		//Even voor het gemak de exacte coördinaten weergeven
+		//Even voor het gemak de exacte coÃ¶rdinaten weergeven
 		printBoardCoords();
 	}
 
@@ -231,8 +234,8 @@ public class BoterKaasEieren {
 	}
 
 	private void printBoardCoords() {
-		System.out.println("Vul de coördinaten in zonder haakjes, gescheiden door een komma.");
-		System.out.println("De coördinaten in het bord zijn als volgt:");
+		System.out.println("Vul de coÃ¶rdinaten in zonder haakjes, gescheiden door een komma.");
+		System.out.println("De coÃ¶rdinaten in het bord zijn als volgt:");
 		System.out.println("+-------+-------+-------+");
 		for (int i = 0; i < 3; i++) {
 			System.out.print("| ");
@@ -307,6 +310,27 @@ public class BoterKaasEieren {
 	private boolean checkRowCol(char c1, char c2, char c3) {
 		return ((c1 != '-') && (c1 == c2) && (c2 == c3));
 	}
-
-
+	
+	//Deze methode controleert op correctheid van de invoer adv een array met juiste keywords.
+	//Als er een match is wordt een juiste invoer geretourneerd, bij geen match wordt de gebruiker om een nieuwe invoer gevraagd.
+	
+	private String getInput() {
+                String [ ] validInputs = {"0,0","0,1","0,2","1,0","1,1","1,2","2,0","2,1","2,2"};
+                String input = reader.next();
+                boolean check = true;
+                while(check) {
+	            for(int i = 0; i < validInputs.length; i++) {
+	                if(input.equals(validInputs[i])) {
+	                    check = false; 
+	                }
+	            }
+	            if(check) {
+	                System.out.println("Dit is een foute invoer.\nGeef positie op (x,y):");
+	                input = reader.next();	
+	            }
+	    	}
+	        return input;	    
+	}
+	
+	
 }
